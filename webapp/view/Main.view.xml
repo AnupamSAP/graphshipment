@@ -8,52 +8,78 @@
     xmlns:viz.data="sap.viz.ui5.data"
     xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
     <Page class="sapUiResponsiveContentPadding">
-     <!-- Search and Filter -->
-            <Toolbar class="sapUiSmallMarginTop sapUiSmallMarginBottom">
+    
 
-               
+   <!-- Search and Filter -->
+<Toolbar
+    class="sapUiSmallMarginTop sapUiSmallMarginBottom">
 
-               
-                
+    
 
-                <Select
-                    width="12rem"
-                    change="onStatusFilter">
 
-                    <items>
-                        <core:Item key="ALL" text="All Statuses" />
-                        <core:Item key="DELIVERED" text="Pack Complete" />
-                        <core:Item key="INPACKING" text="In Packing" />
-                        <core:Item key="PRINTED" text="Printed" />
-                        <core:Item key="UNSELeCTED" text="Unselected" />
-                        <core:Item key="WEIGHED" text="Weighed" />
-                         <core:Item key="MANIFESTED" text="Manifested" />
-                         <core:Item key="SHIPPED" text="Shipped/Invoiced" />
-                         <core:Item key="CANCELLED" text="Cancelled" />
-                    </items>
 
-                </Select>
-                 <ToolbarSpacer />
-                <Select
-                    width="12rem"
-                    change="onStatusFilter">
+    <!-- Status Filter -->
+    <Select
+        width="12rem"
+        change="onStatusFilter">
 
-                    <items>
-                        <core:Item key="ALL" text="Division" />
-                        <core:Item key="ALL" text="CDC-2 " />
-                        <core:Item key="ALL" text="CDC-1" />
-                    </items>
+        <items>
+            <core:Item key="ALL" text="All Statuses" />
+            <core:Item key="DELIVERED" text="Pack Complete" />
+            <core:Item key="INPACKING" text="In Packing" />
+            <core:Item key="PRINTED" text="Printed" />
+            <core:Item key="UNSELeCTED" text="Unselected" />
+            <core:Item key="WEIGHED" text="Weighed" />
+            <core:Item key="MANIFESTED" text="Manifested" />
+            <core:Item key="SHIPPED" text="Shipped/Invoiced" />
+            <core:Item key="CANCELLED" text="Cancelled" />
+        </items>
 
-                </Select>
-                <DateRangeSelection
-            id="dateRange"
-            width="20rem"
-            displayFormat="dd/MM/yyyy"
-            valueFormat="yyyy-MM-dd"
-            delimiter=" - "
-            change="onDateChange" />
+    </Select>
 
-            </Toolbar>
+    <!-- Division Filter -->
+    <Select
+        width="12rem"
+        change="onStatusFilter">
+
+        <items>
+            <core:Item key="ALL" text="Division" />
+            <core:Item key="CDC-2" text="CDC-2" />
+            <core:Item key="CDC-1" text="CDC-1" />
+        </items>
+
+    </Select>
+
+    <!-- Date Filter -->
+    <DateRangeSelection
+        id="dateRange"
+        width="20rem"
+        displayFormat="dd/MM/yyyy"
+        valueFormat="yyyy-MM-dd"
+        delimiter=" - "
+        change="onDateChange" />
+        <ToolbarSpacer/>
+         <ToolbarSeparator />
+         <ToolbarSeparator />
+
+        <!-- Navigation Buttons -->
+    <Button
+        text="Sales Order"
+        icon="sap-icon://sales-order"
+        type="Emphasized"
+        press="onSalesOrderPress"
+        class="sapUiTinyMarginEnd" />
+
+    <Button
+        text="iDoc"
+        icon="sap-icon://document"
+        type="Default"
+        press="onIDocPress"
+        class="sapUiTinyMarginEnd" />
+
+   
+
+</Toolbar>
     <VBox
     class="sapUiResponsiveContentPadding">
 
