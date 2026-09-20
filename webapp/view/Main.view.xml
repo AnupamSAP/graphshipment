@@ -1,0 +1,340 @@
+<mvc:View controllerName="com.styker.graphshipment.controller.Main"
+   
+   
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+    <Page class="sapUiResponsiveContentPadding">
+     <!-- Search and Filter -->
+            <Toolbar class="sapUiSmallMarginTop sapUiSmallMarginBottom">
+
+               
+
+               
+                
+
+                <Select
+                    width="12rem"
+                    change="onStatusFilter">
+
+                    <items>
+                        <core:Item key="ALL" text="All Statuses" />
+                        <core:Item key="DELIVERED" text="Pack Complete" />
+                        <core:Item key="INPACKING" text="In Packing" />
+                        <core:Item key="PRINTED" text="Printed" />
+                        <core:Item key="UNSELeCTED" text="Unselected" />
+                        <core:Item key="WEIGHED" text="Weighed" />
+                         <core:Item key="MANIFESTED" text="Manifested" />
+                         <core:Item key="SHIPPED" text="Shipped/Invoiced" />
+                         <core:Item key="CANCELLED" text="Cancelled" />
+                    </items>
+
+                </Select>
+                 <ToolbarSpacer />
+                <Select
+                    width="12rem"
+                    change="onStatusFilter">
+
+                    <items>
+                        <core:Item key="ALL" text="Division" />
+                        <core:Item key="ALL" text="CDC-2 " />
+                        <core:Item key="ALL" text="CDC-1" />
+                    </items>
+
+                </Select>
+                <DateRangeSelection
+            id="dateRange"
+            width="20rem"
+            displayFormat="dd/MM/yyyy"
+            valueFormat="yyyy-MM-dd"
+            delimiter=" - "
+            change="onDateChange" />
+
+            </Toolbar>
+    <VBox
+    class="sapUiResponsiveContentPadding">
+
+    <!-- ===================================================== -->
+    <!-- PAGE HEADER -->
+    <!-- ===================================================== -->
+
+ 
+
+
+      
+
+
+    <!-- ===================================================== -->
+    <!-- CHARTS -->
+    <!-- ===================================================== -->
+
+    <HBox
+        width="100%"
+        wrap="Wrap"
+        justifyContent="SpaceBetween"
+        class="sapUiSmallMarginBottom">
+
+
+        <!-- ================================================= -->
+        <!-- ORDERS BY DIVISION -->
+        <!-- ================================================= -->
+
+        <VBox
+            width="49%"
+            class="dashboardChartCard">
+
+            <Title
+                text="Orders by Division"
+                level="H4"
+                class="sapUiSmallMarginBegin sapUiSmallMarginTop" />
+
+            <viz:VizFrame
+    id="idVizFrameDivisionStatus"
+    vizType="column"
+    width="100%"
+    height="350px"
+    uiConfig="{applicationSet:'fiori'}">
+
+    <viz:dataset>
+
+        <viz.data:FlattenedDataset
+            data="{localModel>/divisionStatusChart}">
+
+            <viz.data:dimensions>
+
+                <viz.data:DimensionDefinition
+                    name="Division"
+                    value="{localModel>div_name}" />
+
+            </viz.data:dimensions>
+
+            <viz.data:measures>
+
+                <viz.data:MeasureDefinition
+                    name="Printed"
+                    value="{localModel>Printed}" />
+
+                <viz.data:MeasureDefinition
+                    name="In Packing"
+                    value="{localModel>In Packing}" />
+
+                <viz.data:MeasureDefinition
+                    name="Pack Completed"
+                    value="{localModel>Pack Completed}" />
+
+                <viz.data:MeasureDefinition
+                    name="Weighed"
+                    value="{localModel>Weighed}" />
+
+                <viz.data:MeasureDefinition
+                    name="Shipped/Invoiced"
+                    value="{localModel>Shipped/Invoiced}" />
+
+                <viz.data:MeasureDefinition
+                    name="Delivered"
+                    value="{localModel>Delivered}" />
+
+                <viz.data:MeasureDefinition
+                    name="Cancelled"
+                    value="{localModel>Cancelled}" />
+
+            </viz.data:measures>
+
+        </viz.data:FlattenedDataset>
+
+    </viz:dataset>
+
+    <viz:feeds>
+
+        <viz.feeds:FeedItem
+            uid="categoryAxis"
+            type="Dimension"
+            values="Division" />
+
+        <viz.feeds:FeedItem
+            uid="valueAxis"
+            type="Measure"
+            values="Printed,In Packing,Pack Completed,Weighed,Shipped/Invoiced,Delivered,Cancelled" />
+
+    </viz:feeds>
+
+    <viz:dependents>
+    <viz:Popover id="idPopOver"></viz:Popover>
+</viz:dependents>
+
+</viz:VizFrame>
+
+        </VBox>
+
+
+        <!-- ================================================= -->
+        <!-- ORDERS BY STATUS -->
+        <!-- ================================================= -->
+
+        <VBox
+            width="49%"
+            class="dashboardChartCard">
+
+            <Title
+                text="Orders by Status"
+                level="H4"
+                class="sapUiSmallMarginBegin sapUiSmallMarginTop" />
+
+            <viz:VizFrame
+    id="idVizFrameStatus"
+    vizType="bar"
+    width="100%"
+    height="350px"
+    uiConfig="{applicationSet:'fiori'}">
+
+    <viz:dataset>
+
+        <viz.data:FlattenedDataset
+            data="{localModel>/statusChart}">
+
+            <viz.data:dimensions>
+
+                <viz.data:DimensionDefinition
+                    name="Status"
+                    value="{localModel>status}" />
+
+            </viz.data:dimensions>
+
+            <viz.data:measures>
+
+                <viz.data:MeasureDefinition
+                    name="Orders"
+                    value="{localModel>count}" />
+
+            </viz.data:measures>
+
+        </viz.data:FlattenedDataset>
+
+    </viz:dataset>
+
+    <viz:feeds>
+
+        <viz.feeds:FeedItem
+            uid="categoryAxis"
+            type="Dimension"
+            values="Status" />
+
+        <viz.feeds:FeedItem
+            uid="valueAxis"
+            type="Measure"
+            values="Orders" />
+
+    </viz:feeds>
+
+    <viz:dependents>
+
+         <viz:Popover
+        id="idStatusPopover" />
+    </viz:dependents>
+
+</viz:VizFrame>
+        </VBox>
+
+    </HBox>
+
+
+    <!-- ===================================================== -->
+    <!-- TABLE -->
+    <!-- ===================================================== -->
+
+   
+
+</VBox>
+    </Page>
+    
+     <!-- <layout:FixFlex id='chartFixFlex' minFlexSize="250">
+     <layout:flexContent>
+           <viz:VizFrame
+    id="idVizFrameDivision"
+    vizType="bar"
+    width="100%"
+    height="350px">
+
+    <viz:dataset>
+        <viz.data:FlattenedDataset data="{localModel>/}">
+
+            <viz.data:dimensions>
+                <viz.data:DimensionDefinition
+                    name="Division"
+                    value="{localModel>div_name}" />
+            </viz.data:dimensions>
+
+            <viz.data:measures>
+                <viz.data:MeasureDefinition
+                    name="Orders"
+                    value="{localModel>COUNT}" />
+            </viz.data:measures>
+
+        </viz.data:FlattenedDataset>
+    </viz:dataset>
+
+    <viz:feeds>
+        <viz.feeds:FeedItem
+            uid="categoryAxis"
+            type="Dimension"
+            values="Division" />
+
+        <viz.feeds:FeedItem
+            uid="valueAxis"
+            type="Measure"
+            values="Orders" />
+    </viz:feeds>
+
+    <viz:dependents>
+        <viz:Popover />
+    </viz:dependents>
+
+</viz:VizFrame>
+<viz:VizFrame
+    id="idVizFrameStatus"
+    vizType="bar"
+    width="100%"
+    height="350px">
+
+    <viz:dataset>
+        <viz.data:FlattenedDataset data="{localModel>/}">
+
+            <viz.data:dimensions>
+                <viz.data:DimensionDefinition
+                    name="Status"
+                    value="{localModel>UNIFIED_STATUS_DESC}" />
+            </viz.data:dimensions>
+
+            <viz.data:measures>
+                <viz.data:MeasureDefinition
+                    name="Orders"
+                    value="{localModel>COUNT}" />
+            </viz.data:measures>
+
+        </viz.data:FlattenedDataset>
+    </viz:dataset>
+
+    <viz:feeds>
+        <viz.feeds:FeedItem
+            uid="categoryAxis"
+            type="Dimension"
+            values="Status" />
+
+        <viz.feeds:FeedItem
+            uid="valueAxis"
+            type="Measure"
+            values="Orders" />
+    </viz:feeds>
+
+    <viz:dependents>
+        <viz:Popover />
+    </viz:dependents>
+
+</viz:VizFrame>
+        </layout:flexContent>
+            </layout:FixFlex> -->
+
+</mvc:View>

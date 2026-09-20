@@ -1,0 +1,64 @@
+{
+    "statusChart": [
+        {
+            "status": "Printed",
+            "count": 41
+        },
+        {
+            "status": "In Packing",
+            "count": 64
+        },
+        {
+            "status": "Pack Completed",
+            "count": 81
+        },
+        {
+            "status": "Weighed",
+            "count": 39
+        },
+        {
+            "status": "Shipped/Invoiced",
+            "count": 83
+        },
+        {
+            "status": "Delivered",
+            "count": 67
+        },
+        {
+            "status": "Cancelled",
+            "count": 14
+        }
+    ],
+    "divisionStatusChart": [
+        {
+            "div_name": "CDC-1",
+            "Printed": 12,
+            "In Packing": 18,
+            "Pack Completed": 25,
+            "Weighed": 8,
+            "Shipped/Invoiced": 20,
+            "Delivered": 14,
+            "Cancelled": 3
+        },
+        {
+            "div_name": "CDC-2",
+            "Printed": 8,
+            "In Packing": 15,
+            "Pack Completed": 19,
+            "Weighed": 11,
+            "Shipped/Invoiced": 24,
+            "Delivered": 18,
+            "Cancelled": 2
+        },
+        {
+            "div_name": "CDC-3",
+            "Printed": 15,
+            "In Packing": 11,
+            "Pack Completed": 21,
+            "Weighed": 7,
+            "Shipped/Invoiced": 17,
+            "Delivered": 23,
+            "Cancelled": 5
+        }
+    ]
+}
